@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="image-container">
+    <image class="qrcode-image" src="{{qrcode}}" mode="aspectFit" bindlongpress="previewImage"></image>
+  </view>
+  <view class="text-container">
+    <text class="text">长按二维码观看</text>
+  </view>
+</view>

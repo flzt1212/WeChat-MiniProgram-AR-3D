@@ -1,2 +1,4 @@
-
-Page({})
+Page({
+  data: {},
+  onLoad: function() {},
+})

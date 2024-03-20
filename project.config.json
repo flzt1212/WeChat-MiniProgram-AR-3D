@@ -3,10 +3,11 @@
   "packOptions": {
     "ignore": [
       {
-        "type": "folder",
-        "value": "screenshot"
+        "value": "screenshot",
+        "type": "folder"
       }
-    ]
+    ],
+    "include": []
   },
   "setting": {
     "urlCheck": false,
@@ -45,28 +46,14 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.9.0",
-  "appid": "wx9222f90024d17a42",
+  "libVersion": "3.3.5",
+  "appid": "wx55e48bf1e9dbb8f8",
   "projectname": "WeChat-AR-3D",
-  "debugOptions": {
-    "hidedInDevtools": []
-  },
-  "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "list": []
-    }
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
   }
 }

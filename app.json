@@ -10,6 +10,18 @@
       ]
     },
     {
+      "root": "look_shoes",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
+      "root": "find_shoes",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
       "root": "package_panorama",
       "pages": [
         "pages/photo/photo"
