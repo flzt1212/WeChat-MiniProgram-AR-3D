@@ -12,189 +12,215 @@ var isDeviceMotion = false;
 var isIOS = false;
 
 function initThree(canvasId, modelUrl, _isIOS) {
-    isIOS = _isIOS;
-    wx.createSelectorQuery()
-        .select('#' + canvasId)
-        .node()
-        .exec((res) => {
-            canvas = res[0].node;
-            THREE = createScopedThreejs(canvas);
+  isIOS = _isIOS;
+  wx.createSelectorQuery()
+    .select('#' + canvasId)
+    .node()
+    .exec((res) => {
+      canvas = res[0].node;
+      THREE = createScopedThreejs(canvas);
 
-            initScene();
-            loadModel(modelUrl);
-        });
+      initScene();
+      loadModel(modelUrl);
+    });
 }
 
 function initScene() {
-    lon = -90;
-    lat = 0;
+  lon = -90;
+  lat = 0;
 
-    // init Perspective Camera
-    camera = new THREE.PerspectiveCamera(75,
-        canvas.width / canvas.height,
-        1,
-        1000);
-    // according to camera position
-    camera.position.set(0, 3, 5);
+  // init Perspective Camera
+  camera = new THREE.PerspectiveCamera(75,
+    canvas.width / canvas.height,
+    1,
+    1000);
+  // according to camera position
+  camera.position.set(0, 3, 5);
 
-    scene = new THREE.Scene();
-    // ambient light
-    scene.add(new THREE.AmbientLight(0xffffff));
-    // direction light
-    var directionallight = new THREE.DirectionalLight(0xffffff, 1);
-    directionallight.position.set(5, 10, 7.5);
-    scene.add(directionallight);
+  scene = new THREE.Scene();
+  // ambient light
+  scene.add(new THREE.AmbientLight(0xffffff));
+  // direction light
+  var directionallight = new THREE.DirectionalLight(0xffffff, 1);
+  directionallight.position.set(5, 10, 7.5);
+  scene.add(directionallight);
 
-    // init render
-    renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true,
-    });
-    const devicePixelRatio = wx.getSystemInfoSync().pixelRatio;
-    console.log('devicePixelRatio', devicePixelRatio);
-    renderer.setPixelRatio(devicePixelRatio);
-    renderer.setSize(canvas.width, canvas.height);
+  // init render
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+  });
+  const devicePixelRatio = wx.getSystemInfoSync().pixelRatio;
+  console.log('devicePixelRatio', devicePixelRatio);
+  renderer.setPixelRatio(devicePixelRatio);
+  renderer.setSize(canvas.width, canvas.height);
 
-    // gamma色彩空间校正，以适应人眼对亮度的感觉。
-    renderer.gammaOutput = true
-    renderer.gammaFactor = 2.2
+  // gamma色彩空间校正，以适应人眼对亮度的感觉。
+  renderer.gammaOutput = true
+  renderer.gammaFactor = 2.2
 
-    animate();
+  animate();
 
 }
 
 function loadModel(modelUrl) {
-    registerGLTFLoader(THREE);
-    var loader = new THREE.GLTFLoader();
-    wx.showLoading({
-        title: 'Loading Model...',
+  registerGLTFLoader(THREE);
+  var loader = new THREE.GLTFLoader();
+  wx.showLoading({
+    title: 'Loading Model...',
+  });
+  loader.load(modelUrl,
+    function (gltf) {
+      console.log('loadModel', 'success');
+      var model = gltf.scene;
+      // save model
+      mainModel = model;
+      scene.add(model);
+      wx.hideLoading();
+    },
+    null,
+    function (error) {
+      console.log('loadModel', error);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Loading model failed.',
+        icon: 'none',
+        duration: 3000,
+      });
     });
-    loader.load(modelUrl,
-        function (gltf) {
-            console.log('loadModel', 'success');
-            var model = gltf.scene;
-            // save model
-            mainModel = model;
-            scene.add(model);
-            wx.hideLoading();
-        },
-        null,
-        function (error) {
-            console.log('loadModel', error);
-            wx.hideLoading();
-            wx.showToast({
-                title: 'Loading model failed.',
-                icon: 'none',
-                duration: 3000,
-            });
-        });
 }
 
 function updateModel(modelUrl) {
-    var loader = new THREE.GLTFLoader();
-    // loading
-    wx.showLoading({
-        title: 'Loading Model...',
+  var loader = new THREE.GLTFLoader();
+  // loading
+  wx.showLoading({
+    title: 'Loading Model...',
+  });
+  loader.load(modelUrl,
+    function (gltf) {
+      console.log('loadModel', 'success');
+      var model = gltf.scene;
+      // remove old model
+      scene.remove(mainModel);
+      // save new model
+      mainModel = model;
+      // add new model
+      scene.add(model);
+      wx.hideLoading();
+    },
+    null,
+    function (error) {
+      console.log('loadModel', error);
+      wx.hideLoading();
+      wx.showToast({
+        title: 'Loading model failed.',
+        icon: 'none',
+        duration: 3000,
+      });
     });
-    loader.load(modelUrl,
-        function (gltf) {
-            console.log('loadModel', 'success');
-            var model = gltf.scene;
-            // remove old model
-            scene.remove(mainModel);
-            // save new model
-            mainModel = model;
-            // add new model
-            scene.add(model);
-            wx.hideLoading();
-        },
-        null,
-        function (error) {
-            console.log('loadModel', error);
-            wx.hideLoading();
-            wx.showToast({
-                title: 'Loading model failed.',
-                icon: 'none',
-                duration: 3000,
-            });
-        });
 
-    wx.hideLoading();
+  wx.hideLoading();
 }
 
 function animate() {
-    requestId = canvas.requestAnimationFrame(animate);
+  requestId = canvas.requestAnimationFrame(animate);
 
-    if (isDeviceMotion) {
-        deviceOrientationControl.deviceControl(camera, device, THREE, isIOS);
-    }
-    else {
-        deviceOrientationControl.modelRotationControl(mainModel, lon, lat, gradient, THREE);
-    }
+  if (isDeviceMotion) {
+    deviceOrientationControl.deviceControl(camera, device, THREE, isIOS);
+  }
+  else {
+    deviceOrientationControl.modelRotationControl(mainModel, lon, lat, gradient, THREE);
+  }
 
-    // render for Perspective Camera
-    renderer.render(scene, camera);
+  // render for Perspective Camera
+  renderer.render(scene, camera);
 }
 
 function stopAnimate() {
-    if (canvas && requestId) {
-        canvas.cancelAnimationFrame(requestId);
-    }
+  if (canvas && requestId) {
+    canvas.cancelAnimationFrame(requestId);
+  }
 }
 
 function onTouchstart(event) {
-    var touch = event.touches[0];
-    touchX = touch.x;
-    touchY = touch.y;
+  var touch = event.touches[0];
+  touchX = touch.x;
+  touchY = touch.y;
 }
 
+var prevDistance = 0;
+var sensitivity = 0.01; // 调整敏感度，值越小缩放越平缓
 function onTouchmove(event) {
-    var touch = event.touches[0];
+  var touch = event.touches[0];
+  // 实现缩放功能
+  if (event.touches.length >= 2) {
+    var touch1 = event.touches[0];
+    var touch2 = event.touches[1];
+    var distance = Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) + Math.pow(touch2.clientY - touch1.clientY, 2));
+
+    if (!prevDistance) {
+      prevDistance = distance;
+      return;
+    }
+
+    var scale = 1 + (distance - prevDistance) * sensitivity; // 根据距离差计算缩放比例
+
+    mainModel.scale.x *= scale;
+    mainModel.scale.y *= scale;
+    mainModel.scale.z *= scale;
+
+    prevDistance = distance;
+
+  } else {
     var moveX = touch.x - touchX;
     var moveY = touch.y - touchY;
     lon += moveX;
     lat += moveY;
+    // 限制 lat 的范围在 [-85, 85] 之间，避免超出范围导致异常
+    lat = Math.max(-85, Math.min(85, lat));
     touchX = touch.x;
     touchY = touch.y;
     gradient = Math.abs(moveX / moveY);
+  }
+
 
 }
 
 function startDeviceMotion() {
-    isDeviceMotion = true;
-    wx.onDeviceMotionChange(function (_device) {
-        device = _device;
-    });
-    wx.startDeviceMotionListening({
-        interval: deviceMotionInterval,
-        success: function () {
-            console.log('startDeviceMotionListening', 'success');
-        },
-        fail: function (error) {
-            console.log('startDeviceMotionListening', error);
-        }
-    });
+  isDeviceMotion = true;
+  wx.onDeviceMotionChange(function (_device) {
+    device = _device;
+  });
+  wx.startDeviceMotionListening({
+    interval: deviceMotionInterval,
+    success: function () {
+      console.log('startDeviceMotionListening', 'success');
+    },
+    fail: function (error) {
+      console.log('startDeviceMotionListening', error);
+    }
+  });
 }
 
 function stopDeviceMotion() {
-    isDeviceMotion = false;
-    wx.offDeviceMotionChange();
-    wx.stopDeviceMotionListening({
-        success: function () {
-            console.log('stopDeviceMotionListening', 'success');
-        },
-        fail: function (error) {
-            console.log('stopDeviceMotionListening', error);
-        }
-    });
+  isDeviceMotion = false;
+  wx.offDeviceMotionChange();
+  wx.stopDeviceMotionListening({
+    success: function () {
+      console.log('stopDeviceMotionListening', 'success');
+    },
+    fail: function (error) {
+      console.log('stopDeviceMotionListening', error);
+    }
+  });
 }
 
 module.exports = {
-    initThree,
-    onTouchstart,
-    onTouchmove,
-    startDeviceMotion,
-    stopDeviceMotion,
-    stopAnimate,
-    updateModel,
+  initThree,
+  onTouchstart,
+  onTouchmove,
+  startDeviceMotion,
+  stopDeviceMotion,
+  stopAnimate,
+  updateModel,
 }

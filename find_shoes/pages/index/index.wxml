@@ -1,14 +1,26 @@
 <view class="container">
   <view class="swiper-container">
     <view class="swiper-button-left" bindtap="swiperButtonLeftTap"></view>
-    <swiper indicator-dots="{{true}}" autoplay="{{false}}" interval="{{3000}}" duration="{{500}}">
+    <swiper current="{{current}}" bindchange="swiperChange" indicator-dots="{{true}}" autoplay="{{false}}" interval="{{3000}}" duration="{{500}}">
       <block wx:for="{{imageUrls}}" wx:key="index">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" mode="aspectFill"></image>
+          <image src="{{item}}" class="slide-image" mode="widthFix"></image>
         </swiper-item>
       </block>
     </swiper>
     <view class="swiper-button-right" bindtap="swiperButtonRightTap"></view>
   </view>
   <button class="choose-shoe" bindtap="onChooseShoe" type="primary">查看详情</button>
+
+  <view class="image-container">
+    <view class="image-block">
+      <block wx:for="{{shoeImage}}" wx:for-index="index">
+        <view class="image-item {{current-1== index ? 'selected' : ''}}" bindtap="selectImage" data-index="{{index+1}}">
+          <image class="image-pic" src="{{item}}"></image>
+        </view>
+      </block>
+    </view>
+
+  </view>
+
 </view>

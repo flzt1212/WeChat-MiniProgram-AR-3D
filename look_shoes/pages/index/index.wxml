@@ -1,7 +1,9 @@
 <view class="container">
   <view class="image-container">
+    <image class="shoe-image" src="{{shoe_img}}"></image>
     <image class="qrcode-image" src="{{qrcode}}" mode="aspectFit" bindlongpress="previewImage"></image>
   </view>
+  <button class="choose-shoe" bindtap="onShoeLook" type="primary">查看AR</button>
   <view class="text-container">
     <text class="text">长按二维码观看</text>
   </view>

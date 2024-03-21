@@ -11,3 +11,9 @@
 .marginTop10{
     margin-top:10px;
 }
+
+.background {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+}

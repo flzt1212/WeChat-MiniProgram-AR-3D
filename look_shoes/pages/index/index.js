@@ -1,6 +1,18 @@
 Page({
   data: {
-    qrcode: '../../assets/hello.png'
+    qrcode: '../../assets/hello.png',
+    shoe_img:'',
+    shoes_name:[
+      '',
+      '2',
+      '3',
+      '4',
+    ]
+  },
+  onShoeLook:function(e){
+    wx.navigateTo({
+      url: `/package_3d_viewer/pages/camera/camera`,
+    })
   },
   previewImage: function (e) {
     var url = e.currentTarget.dataset.src;
@@ -9,6 +21,13 @@ Page({
       urls: [url] // 需要预览的图片链接列表
     })
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    // 获取页面跳转携带的参数
+    console.log(options.current); 
+    let url = `http://saoo0jsrv.hd-bkt.clouddn.com/choose${options.current}.png`
+    this.setData({
+      shoe_img:url,
+    })
   }
+
 });

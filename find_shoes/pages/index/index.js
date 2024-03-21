@@ -1,10 +1,19 @@
 //index.js
 Page({
   data: {
+    current: 0, // 当前显示的图片索引
     imageUrls: [
-      'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose_init.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+    ],
+    shoeImage: [
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
     ]
   },
   swiperButtonLeftTap: function () {
@@ -21,27 +30,29 @@ Page({
       current: current
     });
   },
-  // 点击“选我查看详情”按钮
-  onChooseShoe: function() {
-    console.log("click into look shoes")
-    // 跳转到商品详情页
-    wx.navigateTo({
-      url: '/look_shoes/pages/index/index',
+  swiperChange: function (e) {
+    // 获取当前轮播图的索引
+    let idx = e.detail.current;
+    // console.log('当前轮播图索引：', e.detail.current);
+    this.setData({
+      current:idx
     })
   },
-  // 加减商品数量
-  onCountChange: function(e) {
-    // 获取当前商品数量
-    var count = this.data.shoeCount
-    // 加减商品数量
-    if (e.target.dataset.action === 'add') {
-      count++
-    } else if (e.target.dataset.action === 'minus') {
-      count--
-    }
-    // 更新商品数量
-    this.setData({
-      shoeCount: count
+  // 点击“选我查看详情”按钮
+  onChooseShoe: function() {
+    let current = this.data.current;
+    console.log("current:",current)
+    if(!current)return;
+    // 跳转到商品详情页
+    wx.navigateTo({
+      url: `/look_shoes/pages/index/index?current=${current}`,
     })
+  },
+  selectImage: function(e) {
+    // console.log(e)
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      current: index
+    });
   }
 })
