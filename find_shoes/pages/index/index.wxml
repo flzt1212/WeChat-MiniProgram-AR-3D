@@ -14,9 +14,9 @@
 
   <view class="image-container">
     <view class="image-block">
-      <block wx:for="{{shoeImage}}" wx:for-index="index">
-        <view class="image-item {{current-1== index ? 'selected' : ''}}" bindtap="selectImage" data-index="{{index+1}}">
-          <image class="image-pic" src="{{item}}"></image>
+      <block wx:for="{{styleImage}}" wx:for-index="index">
+        <view class="image-item"  >
+          <image class="image-pic {{current-1== index ? 'selected' : ''}}" src="{{item}}" data-index="{{index+1}}" bindtap="selectImage"></image>
         </view>
       </block>
     </view>

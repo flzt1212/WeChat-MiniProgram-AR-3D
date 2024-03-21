@@ -9,11 +9,11 @@ Page({
       'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
       'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
     ],
-    shoeImage: [
-      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
-      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
-      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
-      'http://saoo0jsrv.hd-bkt.clouddn.com/choose1.png',
+    styleImage: [
+      'http://saoo0jsrv.hd-bkt.clouddn.com/style1.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/style2.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/style3.png',
+      'http://saoo0jsrv.hd-bkt.clouddn.com/style4.png',
     ]
   },
   swiperButtonLeftTap: function () {
@@ -43,6 +43,7 @@ Page({
     let current = this.data.current;
     console.log("current:",current)
     if(!current)return;
+    return
     // 跳转到商品详情页
     wx.navigateTo({
       url: `/look_shoes/pages/index/index?current=${current}`,
