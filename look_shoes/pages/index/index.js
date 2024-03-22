@@ -2,6 +2,7 @@ Page({
   data: {
     qrcode: '../../assets/hello.png',
     shoe_img:'',
+    current:'',
     shoes_name:[
       '',
       '2',
@@ -11,7 +12,7 @@ Page({
   },
   onShoeLook:function(e){
     wx.navigateTo({
-      url: `/package_3d_viewer/pages/camera/camera`,
+      url: `/package_3d_viewer/pages/camera/camera?current=${this.data.current}`,
     })
   },
   previewImage: function (e) {
@@ -27,6 +28,7 @@ Page({
     let url = `http://saoo0jsrv.hd-bkt.clouddn.com/choose${options.current}.png`
     this.setData({
       shoe_img:url,
+      current:options.current,
     })
   }
 

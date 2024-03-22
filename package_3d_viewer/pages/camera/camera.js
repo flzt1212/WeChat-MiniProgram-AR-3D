@@ -1,7 +1,13 @@
 const cameraBusiness = require('../../utils/cameraBusiness.js')
 const canvasId = 'canvas1';
 // a gltf model url
-const modelUrl = 'https://sanyuered.github.io/gltf/robot.glb';
+let modelUrl = 'https://sanyuered.github.io/gltf/robot.glb';
+const modelUrls = [
+  'https://sanyuered.github.io/gltf/robot.glb',
+  'https://sanyuered.github.io/gltf/robot.glb',
+  'https://sanyuered.github.io/gltf/robot.glb',
+  'https://sanyuered.github.io/gltf/robot.glb',
+]
 // localhost url
 // const modelUrl = 'http://127.0.0.1/models/robot.glb';
 var isDeviceMotion = false;
@@ -11,7 +17,9 @@ Page({
   data: {
     devicePosition: 'back',
   },
-  onLoad() {
+  onLoad(options) {
+    modelUrl = modelUrls[options.current]
+    console.log("modelUrl:",modelUrl)
     const system = wx.getSystemInfoSync().system;
     // if iOS
     if (system.indexOf('iOS') !== -1) {

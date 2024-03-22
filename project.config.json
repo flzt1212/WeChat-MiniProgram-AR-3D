@@ -46,7 +46,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "3.3.5",
+  "libVersion": "3.3.4",
   "appid": "wx99d66373065b5ddc",
   "projectname": "WeChat-AR-3D",
   "simulatorType": "wechat",
