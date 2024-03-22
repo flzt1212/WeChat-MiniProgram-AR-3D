@@ -26,5 +26,10 @@
     width:100%;
     bottom:50px;
 }
-
+.reset-camera{
+  color:#00B0CF;
+  position: absolute;
+  right: 10px;
+  top:20px
+}
 

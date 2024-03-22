@@ -1,5 +1,9 @@
-const { createScopedThreejs } = require('threejs-miniprogram');
-const { registerGLTFLoader } = require('../../utils/GLTFLoader.js');
+const {
+  createScopedThreejs
+} = require('threejs-miniprogram');
+const {
+  registerGLTFLoader
+} = require('../../utils/GLTFLoader.js');
 const deviceOrientationControl = require('../../utils/DeviceOrientationControl.js');
 const deviceMotionInterval = 'ui';
 var camera, scene, renderer;
@@ -35,7 +39,7 @@ function initScene() {
     1,
     1000);
   // according to camera position
-  camera.position.set(0, 3, 5);
+  camera.position.set(0, 2, 5);
 
   scene = new THREE.Scene();
   // ambient light
@@ -90,6 +94,45 @@ function loadModel(modelUrl) {
     });
 }
 
+function resetCamera() {
+
+  if (isDeviceMotion && mainModel) {
+    // 获取设备运动数据
+    var accelerationX = device.accelerationIncludingGravity.x;
+    var accelerationY = device.accelerationIncludingGravity.y;
+    var accelerationZ = device.accelerationIncludingGravity.z;
+
+    // 根据设备运动数据计算移动向量
+    var moveVector = new THREE.Vector3(-accelerationX, accelerationY, accelerationZ);
+
+    // 将移动向量转换为相机坐标系中的方向
+    moveVector.applyQuaternion(camera.quaternion);
+
+    // 根据移动向量调整模型位置
+    var moveAmount = 0.01; // 根据需要调整移动的距离
+    mainModel.position.addScaledVector(moveVector, moveAmount);
+  }
+  // 关闭设备移动
+  // stopDeviceMotion();
+
+
+  // 将相机的位置重置到默认状态
+  lon = 0;
+  lat = 0;
+  camera.position.set(0, 2, 5);
+
+  // 将模型的旋转角度重置为默认状态
+  if (mainModel) {
+    mainModel.rotation.set(0, 0, 0);
+  }
+
+  // 将模型的缩放重置为默认状态
+  if (mainModel) {
+    mainModel.scale.set(1, 1, 1);
+  }
+}
+
+
 function updateModel(modelUrl) {
   var loader = new THREE.GLTFLoader();
   // loading
@@ -127,8 +170,7 @@ function animate() {
 
   if (isDeviceMotion) {
     deviceOrientationControl.deviceControl(camera, device, THREE, isIOS);
-  }
-  else {
+  } else {
     deviceOrientationControl.modelRotationControl(mainModel, lon, lat, gradient, THREE);
   }
 
@@ -223,4 +265,5 @@ module.exports = {
   stopDeviceMotion,
   stopAnimate,
   updateModel,
+  resetCamera,
 }

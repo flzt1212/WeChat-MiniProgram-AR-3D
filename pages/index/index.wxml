@@ -1,8 +1,10 @@
 <view class="page">
-    <image class="background" src="http://saoo0jsrv.hd-bkt.clouddn.com/bg.jpg" mode="aspectFill" bindtap="redirectToPage"></image>
+  <!-- <button bindtap="downloadFile1">点击下载文件1</button>
+  <button bindtap="downloadFile2">点击下载文件2</button> -->
+  <image class="background" src="http://saoo0jsrv.hd-bkt.clouddn.com/bg.jpg" mode="aspectFill" bindtap="redirectToPage"></image>
 
-    <!-- 3D Viewer -->
-    <!-- <view class="weui-panel">
+  <!-- 3D Viewer -->
+  <!-- <view class="weui-panel">
       <view class="weui-panel__hd">3D Viewer</view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
@@ -16,8 +18,8 @@
       </view>
     </view> -->
 
-    <!-- Panorama -->
-    <!-- <view class="weui-panel">
+  <!-- Panorama -->
+  <!-- <view class="weui-panel">
       <view class="weui-panel__hd">Panorama</view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
@@ -31,7 +33,7 @@
       </view>
     </view> -->
 
-    <!-- <view class="weui-panel">
+  <!-- <view class="weui-panel">
       <view class="weui-panel__hd">Panorama</view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
@@ -45,8 +47,8 @@
       </view>
     </view> -->
 
-    <!-- Compass and Map -->
-    <!-- <view class="weui-panel">
+  <!-- Compass and Map -->
+  <!-- <view class="weui-panel">
       <view class="weui-panel__hd">Compass and Map</view>
       <view class="weui-panel__bd">
         <view class="weui-media-box weui-media-box_text">
