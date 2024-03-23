@@ -1,18 +1,10 @@
 <view class="container">
-  <view class="swiper-container">
-    <view class="swiper-button-left" bindtap="swiperButtonLeftTap"></view>
-    <swiper current="{{current}}" bindchange="swiperChange" indicator-dots="{{true}}" autoplay="{{false}}" interval="{{3000}}" duration="{{500}}">
-      <block wx:for="{{imageUrls}}" wx:key="index">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" mode="widthFix"></image>
-        </swiper-item>
-      </block>
-    </swiper>
-    <view class="swiper-button-right" bindtap="swiperButtonRightTap"></view>
-  </view>
-  <button class="choose-shoe" bindtap="onChooseShoe" type="primary">查看详情</button>
-
   <view class="image-container">
+    <image src="{{imageUrls[current]}}" class="slide-image" mode="heightFix"></image>
+  </view>
+  <image wx:if="{{current}}" class="choose-shoe" src="http://saoo0jsrv.hd-bkt.clouddn.com/lookshoe-button.png" bindtap="onChooseShoe"></image>
+
+  <view class="style-container">
     <view class="image-block">
       <block wx:for="{{styleImage}}" wx:for-index="index">
         <view class="image-item"  >

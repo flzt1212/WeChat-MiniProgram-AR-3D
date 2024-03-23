@@ -1,66 +1,39 @@
 page{
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('http://saoo0jsrv.hd-bkt.clouddn.com/bg-findshoe.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 .container {
   width: 100%;
   height: 100%;
   position: relative;
 }
-.swiper-container {
+.image-container {
   position: relative;
   width: 100%;
-  height: 55%; 
-  top:10px;
+  height: 58vh; 
+}
+.slide-image{
+  position: absolute;
+  height: 46vh;
+  top: 7vh;
+  left: 50%;
+  transform:translate(-50%,0);
+}
+.choose-shoe {
+  position: relative;
+  width: 120px;
+  height: 50px;
+  margin-top: 3vh;
   left: 50%;
   transform:translate(-50%,0);
 }
 
-.swiper-button-left, .swiper-button-right {
+.style-container {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.swiper-button-left {
-  left: 10px;
-}
-
-.swiper-button-right {
-  right: 10px;
-}
-swiper{
-  position: relative;
-  top: 5%;
-  width: 80%;
-  margin: 0 auto;
-  height: 100%;
-}
-
-.slide-image{
-  width: 100%;
-  height: 100%;
-}
-.choose-shoe {
-  position: relative;
-  margin-top: 30px;
-  width: 100px;
-  height: 40px;
-  /* background-color: #09f;
-  color: #fff; */
-}
-
-.image-container {
-  position: relative;
-  top: 10px;
+  bottom:11vh;
   width: 100%;
   height: 20%;
 }
