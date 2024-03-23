@@ -1,14 +1,8 @@
 Page({
   data: {
-    qrcode: '../../assets/hello.png',
-    shoe_img:'',
+    bgImg:'',
+    shoeImg:'',
     current:'',
-    shoes_name:[
-      '',
-      '2',
-      '3',
-      '4',
-    ]
   },
   onShoeLook:function(e){
     wx.navigateTo({
@@ -25,9 +19,11 @@ Page({
   onLoad: function (options) {
     // 获取页面跳转携带的参数
     console.log(options.current); 
-    let url = `http://saoo0jsrv.hd-bkt.clouddn.com/choose${options.current}.png`
+    let bg_url = `http://saoo0jsrv.hd-bkt.clouddn.com/bg-shoe${options.current}.jpg`
+    let shoe_url = `http://saoo0jsrv.hd-bkt.clouddn.com/shoe${options.current}.png`
     this.setData({
-      shoe_img:url,
+      bgImg:bg_url,
+      shoeImg:shoe_url,
       current:options.current,
     })
   }

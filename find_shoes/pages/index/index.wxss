@@ -26,11 +26,17 @@ page{
   position: relative;
   width: 120px;
   height: 50px;
-  margin-top: 3vh;
+  margin-top: 1vh;
   left: 50%;
   transform:translate(-50%,0);
 }
-
+.select-me{
+  position: absolute;
+  bottom:28vh;
+  width: 130px;
+  height: 60px;
+  left: 15vw;
+}
 .style-container {
   position: absolute;
   bottom:11vh;
