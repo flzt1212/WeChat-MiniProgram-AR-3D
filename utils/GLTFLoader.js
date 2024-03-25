@@ -1,7 +1,3 @@
-// reference: https://github.com/wechat-miniprogram/threejs-miniprogram/blob/master/example/loaders/gltf-loader.js
-// before: var URL = window.URL || window.webkitURL;
-// after: var URL = {};
-// date: 2019-10-31
 
 export function registerGLTFLoader(THREE) {
 

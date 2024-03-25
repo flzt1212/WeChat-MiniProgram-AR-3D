@@ -1,5 +1,5 @@
 {
-  "description": "WeChat MiniProgram AR with 3D",
+  "description": "DIY 虎头鞋 穿搭",
   "packOptions": {
     "ignore": [
       {
@@ -47,7 +47,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "3.3.4",
-  "appid": "wx99d66373065b5ddc",
+  "appid": "wxe540060a0ce3deff",
   "projectname": "WeChat-AR-3D",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

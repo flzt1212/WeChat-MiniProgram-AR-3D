@@ -20,24 +20,12 @@
       "pages": [
         "pages/index/index"
       ]
-    },
-    {
-      "root": "package_panorama",
-      "pages": [
-        "pages/photo/photo"
-      ]
-    },
-    {
-      "root": "package_map_tracker",
-      "pages": [
-        "pages/camera/camera"
-      ]
     }
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "虎虎虎AR百变鞋子",
+    "navigationBarTitleText": "DIY虎头鞋穿搭",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"
