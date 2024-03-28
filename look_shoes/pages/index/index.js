@@ -3,10 +3,16 @@ Page({
     bgImg:'',
     shoeImg:'',
     current:'',
+    ar_url:[
+      'https://tryon.kivisense.com/viewer/?user=9dae4a936b7c&sku=001&action=view&lang=zh-CN&token=',
+      'https://tryon.kivisense.com/viewer/?user=9dae4a936b7c&sku=002&action=view&lang=zh-CN&token=',
+      'https://tryon.kivisense.com/viewer/?user=2f537b21d320&sku=001&action=view&lang=zh-CN&token=',
+      'https://tryon.kivisense.com/viewer/?user=2f537b21d320&sku=004&action=view&lang=zh-CN&token='
+    ],
   },
   onShoeLook:function(e){
     wx.navigateTo({
-      url: `/package_3d_viewer/pages/camera/camera?current=${this.data.current}`,
+      url: '/pages/webview/webview?url=' + this.data.ar_url[this.data.current-1]
     })
   },
   previewImage: function (e) {
