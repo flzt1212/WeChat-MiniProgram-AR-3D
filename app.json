@@ -5,12 +5,6 @@
   ],
   "subpackages": [
     {
-      "root": "package_3d_viewer",
-      "pages": [
-        "pages/camera/camera"
-      ]
-    },
-    {
       "root": "look_shoes",
       "pages": [
         "pages/index/index"

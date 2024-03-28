@@ -2,5 +2,5 @@
   <view class="image-container">
     <image class="bg-image" src="{{bgImg}}"></image>
   </view>
-  <image class="look-shoe" bindtap="onShoeLook" src="{{shoeImg}}"></image>
+  <image show-menu-by-longpress class="look-shoe" src="{{shoeImg}}" mode="widthFix" ></image>
 </view>
